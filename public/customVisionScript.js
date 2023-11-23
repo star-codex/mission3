@@ -11,7 +11,6 @@ async function runCustomVisionScript(imageBuffer) {
 			body: formData,
 			headers: {
 				'Prediction-Key': predictionKey,
-				'Content-Type': 'application/octet-stream',
 			},
 		});
 
