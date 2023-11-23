@@ -47,7 +47,6 @@
             background-color: #45a049;
         }
     </style>
-    <script src="customVisionScript.js" defer></script>
 </head>
 <body>
 
@@ -59,33 +58,4 @@
 
     <div id="displayResult"></div>
 </body>
-<script defer>
-const fileInput = document.getElementById('image');
-const displayResult = document.getElementById('displayResult');
-
-fileInput.addEventListener('change', function () {
-	if (fileInput.files.length > 0) {
-		const selectedFile = fileInput.files[0];
-
-		// Read the selected file as a Blob
-		const reader = new FileReader();
-		reader.onload = function (event) {
-			const imageBuffer = event.target.result;
-
-			// Call the runCustomVisionScript function
-			runCustomVisionScript(imageBuffer)
-				.then((result) => {
-					// Display the results
-					displayResult.textContent = result;
-				})
-				.catch((error) => {
-					console.error('Error processing image:', error);
-					displayResult.textContent = 'Error processing image';
-				});
-		};
-
-		// Start reading the file
-		reader.readAsArrayBuffer(selectedFile);
-	}});
-</script>
 </html>

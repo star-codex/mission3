@@ -1,19 +1,15 @@
 const express = require('express');
 const path = require('path');
-const multer = require('multer');
-const { runCustomVisionScript } = require('./public/customVisionScript');
 
 const app = express();
 const port = 3000;
-
-// Set up multer for handling file uploads
-const upload = multer({ dest: 'uploads/' });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 
 app.post('/upload', upload.single('file'), async (req, res) => {
 	try {
