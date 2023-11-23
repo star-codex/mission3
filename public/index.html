@@ -47,14 +47,45 @@
             background-color: #45a049;
         }
     </style>
+    <script src="customVisionScript.js" defer></script>
 </head>
 <body>
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form id="imageForm" action="/upload" method="post" enctype="multipart/form-data">
         <label for="image">Select an image:</label>
-        <input type="file" id="image" name="image" accept="image/*" required>
-        <button type="submit">Upload Image</button>
+        <input type="file" id="image">
+        <button type="submit" id="submitButton">Upload Image</button>
     </form>
 
+    <div id="output"></div>
 </body>
+<script defer>
+const fileInput = document.getElementById('image');
+const displayResult = document.getElementById('displayResult');
+
+fileInput.addEventListener('change', function () {
+	if (fileInput.files.length > 0) {
+		const selectedFile = fileInput.files[0];
+
+		// Read the selected file as a Blob
+		const reader = new FileReader();
+		reader.onload = function (event) {
+			const imageBuffer = event.target.result;
+
+			// Call the runCustomVisionScript function
+			runCustomVisionScript(imageBuffer)
+				.then((result) => {
+					// Display the results
+					displayResult.textContent = result;
+				})
+				.catch((error) => {
+					console.error('Error processing image:', error);
+					displayResult.textContent = 'Error processing image';
+				});
+		};
+
+		// Start reading the file
+		reader.readAsArrayBuffer(selectedFile);
+	}});
+</script>
 </html>
