@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.post('/upload', upload.single('image'), async (req, res) => {
+app.post('/upload', upload.single('file'), async (req, res) => {
 	try {
 		// Access the uploaded image in req.file.buffer
 		const imageBuffer = req.file.buffer;
