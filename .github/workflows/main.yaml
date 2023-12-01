@@ -58,7 +58,7 @@ jobs:
         with:
          azcliversion: latest
           inlineScript: |
-           az account show
+            az account show
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
