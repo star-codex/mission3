@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,14 +15,23 @@ jobs:
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
-      with:
-        node-version: '18'
 
     - name: Install Dependencies
       run: npm install
 
     - name: Run Tests
       run: npm test
+
+      - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az account show
 
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
