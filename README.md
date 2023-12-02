@@ -2,7 +2,7 @@
 
 ## Description
 
-Builds on Mission 2: Has a CI/CD Github Actions workflow to automate deployment after every push to main.
+Builds on Mission 2: Has a CI/CD Github Actions workflow within a yaml file to automate deployment after every push to main.
 
 ## Getting Started
 
